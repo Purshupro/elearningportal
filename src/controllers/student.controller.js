@@ -39,3 +39,16 @@ exports.create = (req, res) => {
         })
     }
 }
+
+exports.delete = (req, res) => {
+    Student.deleteById(req.params.id, (err, student) => {
+        if (err) {
+            res.send(err);
+        }
+        res.json({
+            error: false,
+            message: 'Student successfully deleted',
+            data: student
+        })
+    })
+}

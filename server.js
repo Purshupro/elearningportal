@@ -8,7 +8,16 @@ app.use(bodyParser.json())// define a root route
 
 // listen for requests
 app.get('/', (req, res) => {
-    res.send('Hello world');
+    res.write('<html>');
+    res.write('<head>');
+    res.write('</head>');
+    res.write('<body>');
+    res.write('<h1>');
+    res.write('Hello');
+    res.write('</h1>');
+    res.write('</body>');
+    res.write('</html>');
+    res.send();
 });
 
 //Require student route

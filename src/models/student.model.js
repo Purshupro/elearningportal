@@ -56,4 +56,15 @@ Student.findAll = (result) => {
     })
 }
 
+Student.deleteById = (id, result) => {
+    dbConn.query("DELETE FROM student WHERE reg_no = ?", [id], (err, res) => {
+        if(err) {
+            console.log("Error", err);
+            result(null, err);
+        } else {
+            result(null, res);
+        }
+    })
+}
+
 module.exports = Student;
