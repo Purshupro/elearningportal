@@ -40,6 +40,26 @@ exports.create = (req, res) => {
     }
 }
 
+exports.update = (req, res) => {
+    if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
+        res.status(400).send({
+            error: true,
+            message: "Please provide all required field"
+        })
+    } else {
+        Student.update(req.params.id, Student(req.body), (err, student) => {
+            if (err) {
+                res.send(err);
+            }
+            res.json({
+                error: false,
+                message: 'Student updated successfully',
+                data: student
+            })
+        })
+    }
+}
+
 exports.delete = (req, res) => {
     Student.deleteById(req.params.id, (err, student) => {
         if (err) {
