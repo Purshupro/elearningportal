@@ -13,9 +13,11 @@ app.get('/', (req, res) => {
 
 //Require student route
 const studentRoutes = require('./src/routes/student.routes');
+const facultyRoutes = require('./src/routes/faculty.routes');
 
 //using as middleware
 app.use('/api/v1/student', studentRoutes);
+app.use('/api/v1/faculty', facultyRoutes);
 
 
 app.listen(port, () => {
