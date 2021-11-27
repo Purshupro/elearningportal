@@ -2,9 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');// parse requests of content-type - application/x-www-form-urlencoded
 const app = express();// create express app
 const port = process.env.PORT || 5000;// Setup server port
+var cors = require('cors')
 
 app.use(bodyParser.urlencoded({ extended: true }))// parse requests of content-type - application/json
 app.use(bodyParser.json())// define a root route
+app.use(cors())
 
 // listen for requests
 app.get('/', (req, res) => {
