@@ -1,21 +1,21 @@
 'use strict';
 
-const Course = require('../models/course.model');
+const Users = require('../models/users.model');
 
 exports.findAll = (req, res) => {
-    Course.findAll((err, course) => {
+    Users.findAll((err, users) => {
         console.log('controller');
         if (err) {
             res.send(err);
         }
-        console.log('res', course);
-        res.send(course);
+        console.log('res', users);
+        res.send(users);
     });
 };
 
 exports.create = (req, res) => {
     console.log('Body', req.body);
-    const newCourse = Course(req.body);
+    const newUser = Users(req.body);
 
     //handle null error
     if (
@@ -27,14 +27,14 @@ exports.create = (req, res) => {
             message: 'Please provide all required fields'
         })
     } else {
-        Course.create(newCourse, (err, course) => {
+        Users.create(newUser, (err, user) => {
             if (err) {
                 res.send(err);
             }
             res.json({
                 error: false,
-                message: 'Course added successfully',
-                data: course
+                message: 'User added successfully',
+                data: user
             })
         })
     }
@@ -47,28 +47,28 @@ exports.update = (req, res) => {
             message: "Please provide all required field"
         })
     } else {
-        Course.update(req.params.id, Course(req.body), (err, course) => {
+        Users.update(req.params.id, Users(req.body), (err, user) => {
             if (err) {
                 res.send(err);
             }
             res.json({
                 error: false,
-                message: 'Course updated successfully',
-                data: course
+                message: 'Users updated successfully',
+                data: user
             })
         })
     }
 }
 
 exports.delete = (req, res) => {
-    Course.deleteById(req.params.id, (err, course) => {
+    Users.deleteById(req.params.id, (err, user) => {
         if (err) {
             res.send(err);
         }
         res.json({
             error: false,
-            message: 'Course successfully deleted',
-            data: course
+            message: 'Users successfully deleted',
+            data: user
         })
     })
 }
