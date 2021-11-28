@@ -9,7 +9,7 @@ exports.findAll = (req, res) => {
             res.send(err);
         }
         console.log('res', users);
-        res.send(users);
+        res.status(200).send(users);
     });
 };
 
@@ -31,7 +31,7 @@ exports.create = (req, res) => {
             if (err) {
                 res.send(err);
             }
-            res.json({
+            res.status(201).json({
                 error: false,
                 message: 'User added successfully',
                 data: user

@@ -1,21 +1,21 @@
 'use strict';
 
-const Faculty = require('../models/faculty.model');
+const Activities = require('../models/activities.model');
 
 exports.findAll = (req, res) => {
-    Faculty.findAll((err, faculty) => {
+    Activities.findAll((err, activities) => {
         console.log('controller');
         if (err) {
             res.send(err);
         }
-        console.log('res', faculty);
-        res.send(faculty);
+        console.log('res', activities);
+        res.status(200).send(activities);
     });
 };
 
 exports.create = (req, res) => {
     console.log('Body', req.body);
-    const newStudent = Faculty(req.body);
+    const newActivity = Activities(req.body);
 
     //handle null error
     if (
@@ -27,14 +27,14 @@ exports.create = (req, res) => {
             message: 'Please provide all required fields'
         })
     } else {
-        Faculty.create(newStudent, (err, faculty) => {
+        Activities.create(newActivity, (err, activity) => {
             if (err) {
                 res.send(err);
             }
-            res.json({
+            res.status(201).json({
                 error: false,
-                message: 'Faculty added successfully',
-                data: faculty
+                message: 'User added successfully',
+                data: activity
             })
         })
     }
@@ -47,28 +47,28 @@ exports.update = (req, res) => {
             message: "Please provide all required field"
         })
     } else {
-        Faculty.update(req.params.id, Faculty(req.body), (err, faculty) => {
+        Activities.update(req.params.id, Activities(req.body), (err, activity) => {
             if (err) {
                 res.send(err);
             }
             res.json({
                 error: false,
-                message: 'Faculty updated successfully',
-                data: faculty
+                message: 'Activities updated successfully',
+                data: activity
             })
         })
     }
 }
 
 exports.delete = (req, res) => {
-    Faculty.deleteById(req.params.id, (err, faculty) => {
+    Activities.deleteById(req.params.id, (err, activity) => {
         if (err) {
             res.send(err);
         }
         res.json({
             error: false,
-            message: 'Faculty successfully deleted',
-            data: faculty
+            message: 'Activities successfully deleted',
+            data: activity
         })
     })
 }
