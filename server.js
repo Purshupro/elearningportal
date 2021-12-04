@@ -16,10 +16,12 @@ app.get('/', (req, res) => {
 //Require student route
 const usersRoutes = require('./src/routes/users.routes');
 const activitiesRoute = require('./src/routes/activities.routes');
+const createUpcomingEventRoute = require('./src/routes/upcomingEvent.route');
 
 //using as middleware
 app.use('/api/v1/users', usersRoutes);
 app.use('/api/v1/activities', activitiesRoute);
+app.use('/api/v1/create-upcoming-event', createUpcomingEventRoute);
 
 
 app.listen(port, () => {

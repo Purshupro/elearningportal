@@ -13,6 +13,9 @@ var Activities = (activity) => {
         timings: activity.timings,
         no_of_participants: activity.no_of_participants,
         dept: activity.dept,
+        mode: activity.mode,
+        broucher: activity.broucher,
+        event_type: activity.event_type
     }
 };
 
@@ -29,8 +32,8 @@ Activities.create = (activity, result) => {
     })
 };
 
-Activities.findByUserId = (id, result) => {
-    dbConn.query("SELECT * FROM activities WHERE id = ?", id, (err, res) => {
+Activities.findByDate = (date, result) => {
+    dbConn.query("SELECT * FROM activities WHERE start_date >= ?", date, (err, res) => {
         if (err) {
             console.log("error:", err);
             result(err, null);
@@ -38,7 +41,7 @@ Activities.findByUserId = (id, result) => {
             result(null, res);
         }
     })
-}
+}   
 Activities.findAll = (result) => {
     dbConn.query("SELECT * FROM activities", (err, res) => {
         if (err) {
@@ -63,7 +66,7 @@ Activities.deleteById = (id, result) => {
 }
 
 Activities.update = (id, activity, result) => {
-    dbConn.query("UPDATE activity SET event_name = ?, start_date = ?, end_date = ?, timings = ?, no_of_participants = ?, dept = ? WHERE id = ?",
+    dbConn.query("UPDATE activity SET event_name = ?, start_date = ?, end_date = ?, timings = ?, no_of_participants = ?, dept = ?, mode = ?, broucher = ?, event_type = ? WHERE id = ?",
         [
             activity.event_name,
             activity.start_date,
@@ -71,6 +74,9 @@ Activities.update = (id, activity, result) => {
             activity.timings,
             activity.no_of_participants,
             activity.dept,
+            activity.mode,
+            activity.broucher,
+            activity.event_type,
             id
         ],
         (err, res) => {

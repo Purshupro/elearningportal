@@ -12,6 +12,16 @@ exports.findAll = (req, res) => {
         res.status(200).send(activities);
     });
 };
+exports.findOne = (req, res) => {
+    Activities.findByDate((err, activities) => {
+        console.log('controller');
+        if (err) {
+            res.send(err);
+        }
+        console.log('res', activities);
+        res.status(200).send(activities);
+    });
+};
 
 exports.create = (req, res) => {
     console.log('Body', req.body);

@@ -14,4 +14,7 @@ router.delete('/:id', activitiesController.delete);
 //Update student
 router.put('/:id', activitiesController.update);
 
+//Update student
+router.get('/:id', activitiesController.findOne);
+
 module.exports = router;
