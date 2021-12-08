@@ -27,15 +27,24 @@ exports.create = (req, res) => {
             message: 'Please provide all required fields'
         })
     } else {
-        Users.create(newUser, (err, user) => {
+        Users.create(newUser, (err, user, hasUser) => {
             if (err) {
-                res.send(err);
+                console.log(err);
+                res.send(err.message);
             }
-            res.status(201).json({
-                error: false,
-                message: 'User added successfully',
-                data: user
-            })
+            if (hasUser) {
+                res.status(409).json({
+                    error: true,
+                    message: 'User already exists',
+                    data: user
+                })
+            } else {
+                res.status(201).json({
+                    error: false,
+                    message: 'User registered successfully',
+                    data: user
+                })
+            }
         })
     }
 }
